@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorenta Home | Çok Yakında</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@100;200;300;400&family=Cinzel:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0a0a; overflow-x: hidden; }
+        .font-serif-display { font-family: 'Cormorant Garamond', serif; }
+        .font-logo-main { font-family: 'Cinzel', serif; }
+        .font-logo-sub { font-family: 'Inter', sans-serif; font-weight: 200; }
+        
+        #parallax-bg {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.9)), url('images/bg.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .grain {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .vignette {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.85) 100%);
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .reveal { opacity: 0; animation: fadeInUp 2s cubic-bezier(0.19, 1, 0.22, 1) forwards; }
+        .delay-1 { animation-delay: 0.4s; }
+        .delay-2 { animation-delay: 0.7s; }
+        .delay-3 { animation-delay: 1s; }
+
+        .form-focus-glow:focus-within {
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .success-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: white;
+            -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+            transition: background-color 5000s ease-in-out 0s;
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <div class="grain"></div>
+    <div class="vignette"></div>
+    <div id="parallax-bg"></div>
+
+    <div class="min-h-screen w-full flex flex-col items-center px-4 relative z-10">
+        
+        <div class="flex-grow flex flex-col items-center justify-center w-full py-12">
+            <div class="mb-16 md:mb-24 text-center select-none reveal">
+                <h2 class="font-logo-main text-5xl sm:text-6xl md:text-8xl tracking-[0.25em] md:tracking-[0.3em] font-medium leading-none text-white">LORENTA</h2>
+                <p class="font-logo-sub text-base md:text-xl tracking-[1.2em] md:tracking-[1.5em] mt-4 md:mt-6 opacity-80 text-white ml-[1.2em] md:ml-[1.5em]">HOME</p>
+            </div>
+
+            <div class="max-w-3xl w-full text-center">
+                <h1 class="font-serif-display text-2xl sm:text-3xl md:text-5xl mb-8 md:mb-12 tracking-[0.3em] font-[100] text-white/90 uppercase reveal delay-1 px-2">Çok Yakında</h1>
+                <p class="text-sm md:text-lg text-gray-400 mb-12 md:mb-16 leading-relaxed md:leading-loose font-light tracking-widest reveal delay-2 max-w-xl mx-auto px-4">
+                    Açılışa özel <span class="font-serif-display text-[#D4AF37] italic text-xl md:text-2xl px-1">%20</span> indirim kodunu ve sınırlı sayıdaki koleksiyon kataloğunu kaçırmamak için sıraya girin.
+                </p>
+
+                <div id="form-container" class="reveal delay-3 bg-white/[0.03] backdrop-blur-3xl p-1.5 rounded-2xl md:rounded-full flex flex-col md:flex-row items-center max-w-lg mx-auto border border-white/10 transition-all duration-1000 form-focus-glow">
+                    <input type="email" id="user-email" placeholder="E-posta adresiniz..." 
+                        class="bg-transparent border-none focus:ring-0 flex-grow px-6 md:px-8 py-4 text-white placeholder-gray-600 outline-none font-light w-full text-sm tracking-widest text-center md:text-left">
+                    <button id="submit-btn" onclick="submitForm()" 
+                        class="bg-white text-black px-8 md:px-12 py-4 rounded-xl md:rounded-full font-semibold hover:tracking-[0.35em] transition-all duration-700 text-[10px] tracking-[0.3em] uppercase mt-2 md:mt-0 w-full md:w-auto active:scale-95 disabled:opacity-50">
+                        LİSTEYE KATIL
+                    </button>
+                </div>
+
+                <div id="success-msg" class="hidden mt-4 opacity-0 transition-all duration-1000 transform translate-y-8 px-4">
+                    <div class="success-card backdrop-blur-3xl p-8 md:p-16 rounded-[2rem] md:rounded-[2.5rem] inline-block relative overflow-hidden w-full max-w-md">
+                        <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-[#D4AF37]/50 to-transparent"></div>
+                        <p class="text-[#D4AF37] text-[9px] md:text-[10px] uppercase tracking-[0.5em] md:tracking-[0.6em] mb-2 font-medium">Ayrıcalıklı Üyelik</p>
+                        <p id="display-email" class="text-[#D4AF37] text-[10px] md:text-[12px] tracking-widest mb-6 md:mb-8 font-light opacity-80"></p>
+                        <p class="text-3xl md:text-5xl font-serif-display text-white mb-2 leading-tight">Listeye Kaydınız Yapıldı</p>
+                        <div class="w-10 md:w-12 h-[1px] bg-[#D4AF37]/30 mx-auto my-6"></div>
+                        <p class="text-gray-500 text-[9px] md:text-[10px] tracking-[0.2em] md:tracking-[0.3em] leading-relaxed uppercase text-center">AÇILIŞ GÜNÜ SİZE ÖZEL BİR DAVETİYE<br class="hidden md:block"> GÖNDERECEĞİZ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full py-8 md:py-12 text-gray-600 text-[8px] md:text-[9px] tracking-[0.4em] md:tracking-[0.6em] uppercase opacity-40 font-light reveal delay-3 text-center px-4">
+            Lorenta Labs © 2026 | Evin ruhuna uyum sağlayan parçalar.
+        </div>
+    </div>
+
+    <script>
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzoyQzHTqM50O1kbk0TfV8Qy-NnybOkpgezZM2nHdBNbuTvLIFEzCGUKXDztd32tYpxWQ/exec';
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        if (!isTouchDevice) {
+            document.addEventListener('mousemove', (e) => {
+                const moveX = (e.clientX - window.innerWidth / 2) * 0.012;
+                const moveY = (e.clientY - window.innerHeight / 2) * 0.012;
+                document.getElementById('parallax-bg').style.transform = `translate(${moveX}px, ${moveY}px) scale(1.1)`;
+            });
+        }
+
+        async function submitForm() {
+            const emailInput = document.getElementById('user-email');
+            const submitBtn = document.getElementById('submit-btn');
+            const email = emailInput.value.trim();
+            const container = document.getElementById('form-container');
+            const success = document.getElementById('success-msg');
+            const displayEmail = document.getElementById('display-email');
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if(emailRegex.test(email)) {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "KAYDEDİLİYOR...";
+                displayEmail.innerText = email;
+
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        cache: 'no-cache',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email: email })
+                    });
+
+                    container.style.filter = 'blur(20px)';
+                    container.style.opacity = '0';
+                    container.style.transform = 'scale(0.98)';
+                    
+                    setTimeout(() => {
+                        container.style.display = 'none';
+                        success.classList.remove('hidden');
+                        setTimeout(() => {
+                            success.style.opacity = '1';
+                            success.style.transform = 'translateY(0)';
+                        }, 100);
+                    }, 800);
+                } catch (error) {
+                    alert("Bir hata oluştu, lütfen tekrar deneyin.");
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "LİSTEYE KATIL";
+                }
+            } else {
+                emailInput.style.color = '#ff6b6b';
+                setTimeout(() => emailInput.style.color = 'white', 1500);
+                alert("Lütfen geçerli bir e-posta adresi girin.");
+            }
+        }
+    </script>
+</body>
+</html>
